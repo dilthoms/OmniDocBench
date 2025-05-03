@@ -3,7 +3,7 @@ from scipy.optimize import linear_sum_assignment
 import Levenshtein
 from collections import defaultdict
 import copy
-from utils.match import compute_edit_distance_matrix_new, get_gt_pred_lines, get_pred_category_type
+from .match import compute_edit_distance_matrix_new, get_gt_pred_lines, get_pred_category_type
 import pdb
 import numpy as np
 import evaluate

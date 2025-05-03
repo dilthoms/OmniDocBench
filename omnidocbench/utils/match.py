@@ -4,7 +4,7 @@ import numpy as np
 import re
 import sys
 import pdb
-from utils.data_preprocess import textblock_with_norm_formula, normalized_formula, textblock2unicode, clean_string
+from .data_preprocess import textblock_with_norm_formula, normalized_formula, textblock2unicode, clean_string
 
 # def get_norm_text_lines(lines):
 #     norm_lines = []

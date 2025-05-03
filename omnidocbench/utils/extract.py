@@ -3,7 +3,7 @@ import os
 import json
 import copy
 #from  modules.table_utils import convert_markdown_to_html #end
-from  utils.table_utils import convert_markdown_to_html
+from  .table_utils import convert_markdown_to_html
 import re
 import unicodedata
 from bs4 import BeautifulSoup
@@ -12,7 +12,7 @@ from pylatexenc.latex2text import LatexNodes2Text
 from pylatexenc.latexwalker import LatexWalker, LatexEnvironmentNode, LatexCharsNode, LatexGroupNode, LatexMacroNode, LatexSpecialsNode
 from collections import defaultdict
 import pdb
-from utils.data_preprocess import remove_markdown_fences, replace_repeated_chars, textblock_with_norm_formula, textblock2unicode
+from .data_preprocess import remove_markdown_fences, replace_repeated_chars, textblock_with_norm_formula, textblock2unicode
 
 
 def extract_tabular(text):

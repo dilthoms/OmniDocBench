@@ -7,8 +7,8 @@ import Levenshtein
 from .table_metric import TEDS
 import evaluate
 import random
-from utils.read_files import save_paired_result
-from registry.registry import METRIC_REGISTRY
+from omnidocbench.utils.read_files import save_paired_result
+from omnidocbench.registry.registry import METRIC_REGISTRY
 from collections import defaultdict
 import pdb
 import copy
