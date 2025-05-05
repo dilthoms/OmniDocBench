@@ -117,9 +117,9 @@ class TEDS(object):
         parser = html.HTMLParser(remove_comments=True, encoding='utf-8')
         pred = html.fromstring(pred, parser=parser)
         true = html.fromstring(true, parser=parser)
-        if pred.xpath('body/table') and true.xpath('body/table'):
-            pred = pred.xpath('body/table')[0]
-            true = true.xpath('body/table')[0]
+        if pred.xpath('//body//table') and true.xpath('//body//table'):
+            pred = pred.xpath('//body//table')[0]
+            true = true.xpath('//body//table')[0]
             if self.ignore_nodes:
                 etree.strip_tags(pred, *self.ignore_nodes)
                 etree.strip_tags(true, *self.ignore_nodes)

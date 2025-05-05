@@ -88,7 +88,7 @@ class call_TEDS():
                 structure_only_result[group_name] = np.nan
                 print(f'Warning: Empyty matched samples for {group_name}.')
 
-        return samples, {'TEDS': result, 'TEDS_structure_only': structure_only_result}
+        return {"samples": samples, 'TEDS': result['all']}#, 'TEDS_structure_only': structure_only_result['all']}
 
 
 @METRIC_REGISTRY.register("BLEU")
@@ -109,7 +109,7 @@ class call_BLEU():
             bleu_results = bleu.compute(predictions=predictions, references=references)
             result[group_name] = bleu_results["bleu"]
         
-        return self.samples, {'BLEU': result}
+        return {"samples": self.samples, 'BLEU': result['all']}
     
 @METRIC_REGISTRY.register("METEOR")
 class call_METEOR():
@@ -129,7 +129,7 @@ class call_METEOR():
             meteor_results = meteor.compute(predictions=predictions, references=references)
             result[group_name] = meteor_results['meteor']
         
-        return self.samples, {'METEOR': result}
+        return {"samples": self.samples, 'METEOR': result['all']}
 
 @METRIC_REGISTRY.register("Edit_dist")
 class call_Edit_dist():
@@ -157,15 +157,13 @@ class call_Edit_dist():
             saved_samples = samples.samples
         
         if not saved_samples:
-            return samples, {'Edit_dist': {'ALL_page_avg': 'NaN'}}
+            return {"samples": samples, 'Edit_dist': np.nan}
 
         df = pd.DataFrame(saved_samples)
         up_total_avg = df.groupby("image_name").apply(lambda x: x['Edit_num'].sum() / x['upper_len'].sum()) # page level, sum of edits divided by sum of max(gt,pred) lengths for each sample
         per_img_score = up_total_avg.to_dict()
-        with open(f'./result/{save_name}_per_page_edit.json', 'w') as f:
-            json.dump(per_img_score, f, indent=4)        
 
-        return samples, {'Edit_dist': {'ALL_page_avg': up_total_avg.mean()}}
+        return {"samples": samples, 'Edit_dist': up_total_avg.mean()}
     
 @METRIC_REGISTRY.register("CDM")
 class call_CDM():
